@@ -27,6 +27,7 @@ int perro_buscarLugar (sPerro lista[] , int tam);
 sPerro perro_pedirDatos (sPerro perro, int tam , int ultimoIdPerro);
 int perro_verificar (sPerro perro);
 int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro);
+void perro_mostrar (sPerro perro);
 
 
 #endif /* PERRO_H_ */

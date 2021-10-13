@@ -30,8 +30,11 @@ int estadia_inicializar (sEstadia reservas[], int tam);
 int estadia_buscarLugar (sEstadia reserva[] , int tam);
 sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId , sPerro lista[] , int tam);
 int estadia_buscarCoincidenciaId (sPerro lista[] , int tam , int id);
+int estadia_buscarExistenciaId (sEstadia reserva[] , int tam , int id);
 int estadia_verificar (sEstadia reserva);
 int estadia_reservar (sEstadia reserva[] , int tam , int ultimoId , sPerro lista[] , int tamPerro);
+int estadia_modificar (int elemento);
+void estadia_mostrar (sEstadia reservas[] , sPerro listaPerros[], int tamReservas);
 
 
 #endif /* ESTADIA_H_ */

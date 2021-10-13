@@ -88,12 +88,12 @@ int perro_verificar (sPerro perro)
 {
 	int respuesta;
 
-	printf("\nDatos del perro A CONFIRMAR: "
-		   "\n----------------------------------------------------------------\n"
+	printf("\n----------------------------------------------------------------"
+		   "\nDatos del perro A CONFIRMAR: \n"
 		   "\nID: %d\nNOMBRE: %s\nRAZA: %s\nEDAD: %d\n"
 		   "\n----------------------------------------------------------------\n", perro.id, perro.nombre, perro.raza, perro.edad);
 
-	getInt (&respuesta, "Desea CONFIRMAR los datos de la estadia (0 = no / 1 = si)? : ", "Error. Elija una opcion (0 = no / 1 = si): ", 0 , 1);
+	getInt (&respuesta, "Desea CONFIRMAR los datos del perro (0 = no / 1 = si)? : ", "Error. Elija una opcion (0 = no / 1 = si): ", 0 , 1);
 
 	return respuesta;
 }
@@ -119,6 +119,7 @@ int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro)
 			lista[index] = aux;
 			lista[index].estado = 1;
 			ultimoIdPerro++;
+			perro_mostrar(lista[index]);
 			ret = ultimoIdPerro;
 		}
 
@@ -138,4 +139,11 @@ int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro)
 
 
 
+void perro_mostrar (sPerro perro)
+{
+	printf("\n----------------------------------------------------------------------------------------");
+	printf("\n%-20s %-20s %-20s %-20s\n", "ID PERRO", "NOMBRE", "RAZA", "EDAD");
+	printf("\n%-20d %-20s %-20s %-20d", perro.id, perro.nombre, perro.raza, perro.edad);
+	printf("\n----------------------------------------------------------------------------------------\n");
+}
 

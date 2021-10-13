@@ -22,6 +22,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 	int cancelacion;
 	int contadorPerros = 0;
 	float edadPromedio;
+	int flag = 0;
 
 	do
 	{
@@ -61,6 +62,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					{
 						uIdEstadia = auxUltimoIdEstadia;
 						contadorPerros++;
+						flag = 1;
 						printf("\nHa realizado la reserva exitosamente!\n\n");
 						system("pause");
 					}
@@ -69,6 +71,8 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 				break;
 
 		case 2:
+				if (flag == 1 || contadorPerros > 0)
+				{
 				printf("\nModificando la estadía...\n");
 				estadia_mostrar (listaEstadias, listaPerros, tamEstadias);
 				printf("\n\nIngrese el ID de la ESTADIA a modificar: ");
@@ -146,9 +150,18 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 
 
 					}while (opcionSubMenu != 3);
+				}
+				else
+				{
+					printf("\nError. Para acceder a las funciones primero debe hacer una reserva!\n");
+				}
+
 					break;
 
 		case 3:
+
+			if( flag == 1 || contadorPerros > 0)
+			{
 				printf("\nCancelando estadía...\n");
 				estadia_mostrar (listaEstadias, listaPerros, tamEstadias);
 
@@ -175,30 +188,55 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					printf("\nError. No se ha podido cancelar la estadía.\n");
 					system("pause");
 				}
-
+			}
+			else
+			{
+				printf("\nError. Para acceder a las funciones primero debe hacer una reserva\n");
+			}
 				break;
 
 
 
 
 		case 4:
-				estadia_mostrarSoloEstadia(listaEstadias, tamEstadias);
-				system("pause");
+
+				if(flag == 1 || contadorPerros > 0)
+				{
+					estadia_mostrarSoloEstadia(listaEstadias, tamEstadias);
+					system("pause");
+				}
+				else
+				{
+					printf("\nError. Para acceder a las funciones primero debe hacer una reserva\n");
+				}
 				break;
 
 
 		case 5:
-
+				if (flag == 1 || contadorPerros > 0)
+				{
 				perro_mostrarTodos(listaPerros, tamPerros);
 				system("pause");
+				}
+				else
+				{
+					printf("\nError. Para acceder a las funciones primero debe hacer una reserva\n");
+				}
+
 				break;
 
 
 		case 6:
-
-				edadPromedio = perro_edadPromedio(listaPerros, tamPerros, contadorPerros);
-				printf("\nLa edad promedio de los perros cargados es: %.2f\n", edadPromedio);
-				system("pause");
+				if (flag == 1 || contadorPerros > 0)
+				{
+					edadPromedio = perro_edadPromedio(listaPerros, tamPerros, contadorPerros);
+					printf("\nLa edad promedio de los perros cargados es: %.2f\n", edadPromedio);
+					system("pause");
+				}
+				else
+				{
+					printf("\nError. Para acceder a las funciones primero debe hacer una reserva\n");
+				}
 				break;
 		}
 

@@ -34,5 +34,6 @@ int perro_modificar (sPerro lista[] , int tam , int index , int id);
 int perro_buscarCoincidenciaId (sPerro lista[] , int tam, int id);
 int perro_ordenarPorId (sPerro lista[], int tamPerros);
 void perro_mostrarTodos (sPerro lista[] , int tamPerros);
+float perro_edadPromedio (sPerro lista[], int tamPerros, int contador);
 
 #endif /* PERRO_H_ */

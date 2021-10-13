@@ -177,7 +177,7 @@ int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro)
 
 void perro_mostrar (sPerro perro)
 {
-	printf("\n%-20d %-20s %-20s %-20d", perro.id, perro.nombre, perro.raza, perro.edad);
+	printf("%-20d %-20s %-20s %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad);
 }
 
 
@@ -289,3 +289,35 @@ void perro_mostrarTodos (sPerro lista[] , int tamPerros)
 		}
 	}
 }
+
+
+
+
+float perro_edadPromedio (sPerro lista[], int tamPerros, int contador)
+{
+	int i;
+	int acumulador = 0;
+	float promedio;
+
+	if (lista != NULL)
+	{
+		for (i = 0 ; i < tamPerros; i++)
+		{
+			if (lista[i].estado == 1)
+			{
+				acumulador += lista[i].edad;
+			}
+		}
+
+	promedio = (float) acumulador / contador;
+
+	}
+
+	return promedio;
+}
+
+
+
+
+
+

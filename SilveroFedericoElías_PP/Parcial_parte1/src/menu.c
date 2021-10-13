@@ -20,6 +20,8 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 	int idModificacion;
 	int posicion;
 	int cancelacion;
+	int contadorPerros = 0;
+	float edadPromedio;
 
 	do
 	{
@@ -58,6 +60,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					if (auxUltimoIdEstadia != -1)
 					{
 						uIdEstadia = auxUltimoIdEstadia;
+						contadorPerros++;
 						printf("\nHa realizado la reserva exitosamente!\n\n");
 						system("pause");
 					}
@@ -162,6 +165,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 				cancelacion = estadia_cancelar(listaPerros, tamPerros, listaEstadias, tamEstadias, idSearch);
 				if (cancelacion != -1)
 				{
+					contadorPerros--;
 					printf("\nHa CANCELADO la estadía exitosamente!\n");
 					system("pause");
 				}
@@ -188,7 +192,16 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 				perro_mostrarTodos(listaPerros, tamPerros);
 				system("pause");
 				break;
+
+
+		case 6:
+
+				edadPromedio = perro_edadPromedio(listaPerros, tamPerros, contadorPerros);
+				printf("\nLa edad promedio de los perros cargados es: %.2f\n", edadPromedio);
+				system("pause");
+				break;
 		}
+
 
 	}while (opcion != 7);
 

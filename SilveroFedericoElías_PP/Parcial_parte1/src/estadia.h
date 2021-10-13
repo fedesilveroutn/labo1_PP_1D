@@ -9,17 +9,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "input.h"
 #define ESTADIA_H_
 
 typedef struct
 {
-	int id;	//comienza en 100K , autoincremental
-	char nombreDuenio[51]; //validar
-	int telefonoContacto; //validar
-	int idPerro; //validar
-	int fecha; //validar dia, mes y año
+	int id;
+	char nombreDuenio[21];
+	int telefonoContacto;
+	int idPerro;
+	int fecha;
+	int estado;
 
-} sEstadiaDiaria;
+} sEstadia;
+
+
+int estadia_reservar (sEstadia reserva[] , int tam, int ultimoId);
+int estadia_verificar (sEstadia reserva);
+int estadia_buscarLugar (sEstadia reserva[] , int tam);
+sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId);
+int estadia_inicializar (sEstadia reservas[], int tam);
 
 
 #endif /* ESTADIA_H_ */

@@ -1,42 +1,61 @@
+/*
+ * menu.c
+ *
+ *  Created on: 12 oct. 2021
+ *      Author: Fede
+ */
+
 #include "menu.h"
+#include "perro.h"
+#include "estadia.h"
 
-
-int menu ()
+int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int tamPerros , int ultimoId)
 {
 	int opcion;
+	int auxUltimoId;
 
 	do
 	{
-		getInt(&opcion,
-				"\n----------------------------------\n"
-				"1. RESERVAR ESTADIA\n"
-				"2. MODIFICAR ESTADIA\n"
-				"3. CANCELAR ESTADIA\n"
-				"4. LISTAR ESTADIAS\n"
-				"5. LISTAR PERROS\n"
-				"6. PROMEDIO DE EDAD DE LOS PERROS\n"
-				"7. SALIR DEL PROGRAMA\n"
-				"\n----------------------------------\n"
-				"Ingrese una opción (1-7): ",
-				"\n----------------------------------\n"
-				"1. RESERVAR ESTADIA\n"
-				"2. MODIFICAR ESTADIA\n"
-				"3. CANCELAR ESTADIA\n"
-				"4. LISTAR ESTADIAS\n"
-				"5. LISTAR PERROS\n"
-				"6. PROMEDIO DE EDAD DE LOS PERROS\n"
-				"7. SALIR DEL PROGRAMA\n"
-				"\n----------------------------------\n"
-				"Error. Reingrese una opción válida (1-7): ", 1 , 7);
+		getInt (&opcion,
+				"\n-------------------------------------------\n"
+				"\n1. RESERVAR ESTADIA"
+				"\n2. MODIFICAR ESTADIA"
+				"\n3. CANCELAR ESTADÍA"
+				"\n4. LISTAR ESTADÍAS"
+				"\n5. LISTAR PERROS"
+				"\n6. Promedio de edad de los perros"
+				"\n7. SALIR"
+				"\n-------------------------------------------\n"
+				"Ingrese una opcion (1-7): ",
+				"\n-------------------------------------------\n"
+				"\n1. RESERVAR ESTADIA"
+				"\n2. MODIFICAR ESTADIA"
+				"\n3. CANCELAR ESTADÍA"
+				"\n4. LISTAR ESTADÍAS"
+				"\n5. LISTAR PERROS"
+				"\n6. Promedio de edad de los perros"
+				"\n7. SALIR"
+				"\n-------------------------------------------\n"
+				"Error. Reingrese una opcion válida (1-7): ", 1 , 7);
 
 
+		switch (opcion)
+		{
+		case 1:
+				auxUltimoId = estadia_reservar (listaEstadias, tamEstadias , ultimoId);
+				if (auxUltimoId != -1)
+				{
+					ultimoId = auxUltimoId;
+				}
+				break;
 
-
-
+		}
 
 
 
 	}while (opcion != 7);
 
+
 	return 0;
 }
+

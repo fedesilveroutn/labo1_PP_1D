@@ -53,7 +53,7 @@ sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId , sPerro lista[] ,
 	sFecha fecha;
 
 	id = ultimoId + 1;
-	getString (nombreDuenio, "\nIngrese el nombre del dueño: ", "Error. Ingrese un nombre válido (hasta 20 caracteres): ", 21);
+	getString (nombreDuenio, "\n\nIngrese el nombre del dueño: ", "Error. Ingrese un nombre válido (hasta 20 caracteres): ", 21);
 	getInt (&telefonoContacto, "Ingrese tel: ", "Error. Ingrese teléfono válido: ", 1100000000 , 1199999999);
 	getInt (&idPerro, "Ingrese el ID del perro: ", "Error. Ingrese un ID válido: ", 1000 , 10000);
 		while (estadia_buscarCoincidenciaId (lista, tam , idPerro) == -1)

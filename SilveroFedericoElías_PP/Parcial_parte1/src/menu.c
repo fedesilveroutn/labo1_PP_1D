@@ -178,8 +178,14 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 
 
 		case 4:
-
 				estadia_mostrarSoloEstadia(listaEstadias, tamEstadias);
+				system("pause");
+				break;
+
+
+		case 5:
+
+				perro_mostrarTodos(listaPerros, tamPerros);
 				system("pause");
 				break;
 		}

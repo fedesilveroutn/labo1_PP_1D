@@ -153,6 +153,8 @@ int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro)
 			lista[index] = aux;
 			lista[index].estado = 1;
 			ultimoIdPerro++;
+			printf("\n----------------------------------------------------------------------------------------");
+			printf("\n%-20s %-20s %-20s %-20s\n", "ID PERRO", "NOMBRE", "RAZA", "EDAD");
 			perro_mostrar(lista[index]);
 			ret = ultimoIdPerro;
 		}
@@ -175,10 +177,7 @@ int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro)
 
 void perro_mostrar (sPerro perro)
 {
-	printf("\n----------------------------------------------------------------------------------------");
-	printf("\n%-20s %-20s %-20s %-20s\n", "ID PERRO", "NOMBRE", "RAZA", "EDAD");
 	printf("\n%-20d %-20s %-20s %-20d", perro.id, perro.nombre, perro.raza, perro.edad);
-	printf("\n----------------------------------------------------------------------------------------\n");
 }
 
 
@@ -229,10 +228,64 @@ int perro_buscarCoincidenciaId (sPerro lista[] , int tam, int id)
 }
 
 
+int perro_ordenarPorId (sPerro lista[], int tamPerros)
+{
+	int i;
+	int swap;
+	int nuevoLimite;
+	sPerro aux;
+	int ret = -1;
+
+	nuevoLimite = tamPerros - 1;
+
+	do
+	{
+		swap = 0;
+		for ( i = 0; i < nuevoLimite; i++)
+		{
+			if (lista[i].id > lista[i+1].id)
+			{
+				aux = lista[i];
+				lista[i] = lista[i+1];
+				lista[i+1] = aux;
+				swap = 1;
+			}
+			else if (lista[i].id == lista[i+1].id)
+			{
+				if ( strcmp (lista[i].nombre , lista[i+1].nombre) == 1 )
+				{
+					aux = lista[i];
+					lista[i] = lista[i+1];
+					lista[i+1] = aux;
+					swap = 1;
+				}
+			}
+		}
+		nuevoLimite--;
+
+	}while (swap == 1);
+
+	ret = 0;
+	return ret;
+}
 
 
+void perro_mostrarTodos (sPerro lista[] , int tamPerros)
+{
+	int i;
 
+	if (lista != NULL)
+	{
+		perro_ordenarPorId (lista , tamPerros);
 
-
-
-
+		printf("\n----------------------------------------------------------------------------------------");
+		printf("\n%-20s %-20s %-20s %-20s\n", "ID PERRO", "NOMBRE", "RAZA", "EDAD");
+		for (i = 0; i < tamPerros; i++)
+		{
+			if (lista[i].estado == 1)
+			{
+				perro_mostrar(lista[i]);
+			}
+		}
+	}
+}

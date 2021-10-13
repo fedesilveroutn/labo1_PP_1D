@@ -16,12 +16,12 @@ División: 1°D
 #include "fecha.h"
 #define TAM 3
 #define IDESTADIA 100000
-#define IDPERRO 1000
+#define IDPERRO 7002
 
 int main(void) {
 	setbuf(stdout, NULL);
 
-	sPerro perros [TAM] = { {7000, "Lobo", "Sharpei", 2 } , {7001, "Sheila", "Golden", 12 } , {7002, "Reina", "Galgo", 13 } };
+	sPerro perros [TAM] = { {7000, "Lobo", "Sharpei", 2 , 1 } , {7001, "Sheila", "Golden", 12 , 1 } , {7002, "Reina", "Galgo", 13 ,1 } };
 	sEstadia reservas [TAM];
 
 	perro_inicializar (perros , TAM);

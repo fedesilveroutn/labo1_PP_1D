@@ -55,7 +55,7 @@ sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId , sPerro lista[] ,
 	id = ultimoId + 1;
 	getString (nombreDuenio, "\nIngrese el nombre del dueño: ", "Error. Ingrese un nombre válido (hasta 20 caracteres): ", 21);
 	getInt (&telefonoContacto, "Ingrese tel: ", "Error. Ingrese teléfono válido: ", 1100000000 , 1199999999);
-	getInt (&idPerro, "Ingrese el ID del perro: ", "Error. Ingrese un ID válido: ", 1000 , 2000);
+	getInt (&idPerro, "Ingrese el ID del perro: ", "Error. Ingrese un ID válido: ", 1000 , 10000);
 		while (estadia_buscarCoincidenciaId (lista, tam , idPerro) == -1)
 		{
 			printf("Error. ID inexistente. Reintente.\n");
@@ -267,9 +267,72 @@ int estadia_cancelar (sPerro perros[], int tamPerros, sEstadia reserva[], int ta
 }
 
 
+void estadia_mostrarSoloEstadia (sEstadia reservas[] ,  int tamReservas)
+{
+	int i;
+
+	estadia_ordenarPorFecha (reservas, tamReservas);
+
+	printf("\n%-15s %-15s %-20s %-15s\n", "ID ESTADIA", "NOMBRE DUEÑO", "TELEFONO CONTACTO", "FECHA");
+
+	for(i = 0; i < tamReservas; i++)
+	{
+		if (reservas[i].estado == 1)
+		{
+			printf("%-15d %-15s %-20d %-2d/%-2d/%-2d\n",
+														reservas[i].id,
+														reservas[i].nombreDuenio,
+														reservas[i].telefonoContacto,
+														reservas[i].fecha.dia,
+														reservas[i].fecha.mes,
+														reservas[i].fecha.anio);
+		}
+	}
+}
 
 
 
+
+int estadia_ordenarPorFecha (sEstadia reservas[], int tamReservas)
+{
+	int i;
+	int swap;
+	int nuevoLimite;
+	sEstadia aux;
+	int ret = -1;
+
+	nuevoLimite = tamReservas - 1;
+
+	do
+	{
+		swap = 0;
+		for ( i = 0; i < nuevoLimite; i++)
+		{
+			if (reservas[i].fecha.anio < reservas[i+1].fecha.anio || reservas[i].fecha.mes < reservas[i+1].fecha.mes || reservas[i].fecha.dia < reservas[i+1].fecha.dia )
+			{
+				aux = reservas[i];
+				reservas[i] = reservas[i+1];
+				reservas[i+1] = aux;
+				swap = 1;
+			}
+			else if (reservas[i].fecha.anio == reservas[i+1].fecha.anio)
+			{
+				if ( strcmp (reservas[i].nombreDuenio , reservas[i+1].nombreDuenio) == 1 )
+				{
+					aux = reservas[i];
+					reservas[i] = reservas[i+1];
+					reservas[i+1] = aux;
+					swap = 1;
+				}
+			}
+		}
+		nuevoLimite--;
+
+	}while (swap == 1);
+
+	ret = 0;
+	return ret;
+}
 
 
 

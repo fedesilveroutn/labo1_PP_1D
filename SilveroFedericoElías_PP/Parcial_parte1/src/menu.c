@@ -172,10 +172,16 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					system("pause");
 				}
 
-
 				break;
 
 
+
+
+		case 4:
+
+				estadia_mostrarSoloEstadia(listaEstadias, tamEstadias);
+				system("pause");
+				break;
 		}
 
 	}while (opcion != 7);

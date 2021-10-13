@@ -43,23 +43,6 @@ int estadia_buscarLugar (sEstadia reserva[] , int tam)
 }
 
 
-int estadia_buscarCoincidenciaId2 (sEstadia reserva[] , int tam , int id)
-{
-	int i;
-	int posicion = -1;
-	for (i = 0; i < tam; i++)
-	{
-		if ( reserva[i].id == id)
-		{
-			posicion = i;
-			break;
-		}
-	}
-
-	return posicion;
-}
-
-
 //**
 sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId , sPerro lista[] , int tam)
 {
@@ -109,6 +92,23 @@ int estadia_buscarCoincidenciaId (sPerro lista[] , int tam , int id)
 	return ret;
 }
 
+
+
+int estadia_buscarCoincidenciaId2 (sEstadia reserva[] , int tam , int id)
+{
+	int i;
+	int posicion = -1;
+	for (i = 0; i < tam; i++)
+	{
+		if ( reserva[i].id == id)
+		{
+			posicion = i;
+			break;
+		}
+	}
+
+	return posicion;
+}
 
 //**
 int estadia_buscarExistenciaId (sEstadia reserva[] , int tam , int id)
@@ -233,7 +233,7 @@ void estadia_mostrar (sEstadia reservas[] , sPerro listaPerros[],  int tamReserv
 	{
 		if (reservas[i].estado == 1)
 		{
-			printf("%-15d %-15d %-15s %-15s %-15d %-15s %-20d %-2d/%-2d/%-2d",
+			printf("%-15d %-15d %-15s %-15s %-15d %-15s %-20d %-2d/%-2d/%-2d\n",
 																			reservas[i].id,
 																			listaPerros[i].id,
 																			listaPerros[i].nombre,
@@ -250,8 +250,21 @@ void estadia_mostrar (sEstadia reservas[] , sPerro listaPerros[],  int tamReserv
 
 
 
+int estadia_cancelar (sPerro perros[], int tamPerros, sEstadia reserva[], int tamEstadias , int id)
+{
+	int ret = -1;
+	int pos;
 
+	if (reserva != NULL)
+	{
+		pos = estadia_buscarCoincidenciaId2(reserva, tamEstadias, id);
+		reserva[pos].estado = 0;
+		perros[pos].estado = 0;
+		ret = 0;
+	}
 
+	return ret;
+}
 
 
 

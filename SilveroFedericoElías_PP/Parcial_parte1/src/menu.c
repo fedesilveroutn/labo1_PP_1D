@@ -19,6 +19,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 	int idSearch;
 	int idModificacion;
 	int posicion;
+	int cancelacion;
 
 	do
 	{
@@ -142,8 +143,39 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 
 
 					}while (opcionSubMenu != 3);
+					break;
+
+		case 3:
+				printf("\nCancelando estadía...\n");
+				estadia_mostrar (listaEstadias, listaPerros, tamEstadias);
+
+				printf("\n\nIngrese el ID de la ESTADIA a cancelar: ");
+				fflush(stdin);
+				scanf("%d", &idSearch);
+				while ( estadia_buscarExistenciaId (listaEstadias , tamEstadias , idSearch) == -1)
+				{
+					printf("\nError. Reingrese el un ID existente: ");
+					fflush(stdin);
+					scanf("%d", &idSearch);
+				}
+
+				cancelacion = estadia_cancelar(listaPerros, tamPerros, listaEstadias, tamEstadias, idSearch);
+				if (cancelacion != -1)
+				{
+					printf("\nHa CANCELADO la estadía exitosamente!\n");
+					system("pause");
+				}
+
+				else
+				{
+					printf("\nError. No se ha podido cancelar la estadía.\n");
+					system("pause");
+				}
+
 
 				break;
+
+
 		}
 
 	}while (opcion != 7);

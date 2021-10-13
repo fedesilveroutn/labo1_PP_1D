@@ -17,7 +17,8 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 	int auxUltimoIdPerro;
 	int auxNuevoTelefono;
 	int idSearch;
-	int indexSearch;
+	int idModificacion;
+	int posicion;
 
 	do
 	{
@@ -66,7 +67,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 		case 2:
 				printf("\nModificando la estadía...\n");
 				estadia_mostrar (listaEstadias, listaPerros, tamEstadias);
-				printf("\n\nIngrese el ID de la estadía a modificar: ");
+				printf("\n\nIngrese el ID de la ESTADIA a modificar: ");
 				fflush(stdin);
 				scanf("%d", &idSearch);
 				while ( estadia_buscarExistenciaId (listaEstadias , tamEstadias , idSearch) == -1)
@@ -76,53 +77,76 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					scanf("%d", &idSearch);
 				}
 
-				getInt (&opcionSubMenu,
-										"\nMENU DE MODIFICACIONES"
-										"\n--------------------------\n"
-										"\n1. TELEFONO DE CONTACTO"
-										"\n2. PERRO"
-										"\n3. SALIR"
-										"\n--------------------------\n"
-										"Ingrese una opción (1-3): ",
-										"\n--------------------------\n"
-										"\n1. TELEFONO DE CONTACTO"
-										"\n2. PERRO"
-										"\n3. SALIR"
-										"\n--------------------------\n"
-										"Error. Reingrese una opción válida (1-3): " , 1 , 3);
+				posicion = estadia_buscarCoincidenciaId2 (listaEstadias , tamEstadias, idSearch);
 
-				switch (opcionSubMenu)
-				{
-				case 1:
-						printf("\nModificando el teléfono de contacto...\n");
-						indexSearch = estadia_buscarLugar (listaEstadias , tamEstadias);
-						auxNuevoTelefono = estadia_modificar (1);
+					do
+					{
+					getInt (&opcionSubMenu,
+											"\nMENU DE MODIFICACIONES"
+											"\n--------------------------\n"
+											"\n1. TELEFONO DE CONTACTO"
+											"\n2. PERRO"
+											"\n3. SALIR"
+											"\n--------------------------\n"
+											"Ingrese una opción (1-3): ",
+											"\n--------------------------\n"
+											"\n1. TELEFONO DE CONTACTO"
+											"\n2. PERRO"
+											"\n3. SALIR"
+											"\n--------------------------\n"
+											"Error. Reingrese una opción válida (1-3): " , 1 , 3);
 
-
-						if (auxNuevoTelefono != -1)
+						switch (opcionSubMenu)
 						{
-							listaEstadias[indexSearch].telefonoContacto = auxNuevoTelefono;
-							printf("\nHa modificado el NUEVO TELEFONO exitosamente!\n");
-							system("pause");
+						case 1:
+								//modificacion telefono
+								printf("\nModificando el teléfono de contacto...\n");
+								auxNuevoTelefono = estadia_modificar (1);
+								if (auxNuevoTelefono != -1)
+								{
+									listaEstadias[posicion].telefonoContacto = auxNuevoTelefono;
+									printf("\nHa modificado el NUEVO TELEFONO exitosamente!\n");
+									system("pause");
+								}
+
+								else
+								{
+									printf("\nHa cancelado la modificación del nuevo telefono.\n");
+									system("pause");
+								}
+								break;
+
+
+
+						case 2:
+								//modificacion perro
+								printf("\nModificando el perro...\n");
+								if (posicion != -1)
+								{
+									idModificacion = listaPerros[posicion].id;
+									perro_modificar(listaPerros, tamPerros, posicion , idModificacion);
+									printf("\nHa modificado el PERRO exitosamente!\n");
+									system("pause");
+								}
+								else
+								{
+									printf("\nNo fue posible encontrar el perro solicitado.\n");
+								}
+
+								break;
+
+						case 3:
+								printf("\nVolviendo al menú principal...\n");
+								break;
 						}
 
-						else
-						{
-							printf("\nHa cancelado la modificación del nuevo telefono.\n");
-							system("pause");
-						}
-						break;
-				}
+
+					}while (opcionSubMenu != 3);
 
 				break;
-
-
 		}
 
-
-
 	}while (opcion != 7);
-
 
 	return 0;
 }

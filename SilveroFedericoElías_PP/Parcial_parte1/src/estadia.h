@@ -35,6 +35,7 @@ int estadia_verificar (sEstadia reserva);
 int estadia_reservar (sEstadia reserva[] , int tam , int ultimoId , sPerro lista[] , int tamPerro);
 int estadia_modificar (int elemento);
 void estadia_mostrar (sEstadia reservas[] , sPerro listaPerros[], int tamReservas);
+int estadia_buscarCoincidenciaId2 (sEstadia reserva[] , int tam , int id);
 
 
 #endif /* ESTADIA_H_ */

@@ -29,7 +29,7 @@ int main(void) {
 
 	menu (reservas , TAM , perros, TAM , IDESTADIA , IDPERRO);
 
-
+	printf("\nFin del programa.");
 
 
 

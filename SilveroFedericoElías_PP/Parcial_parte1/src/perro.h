@@ -28,6 +28,10 @@ sPerro perro_pedirDatos (sPerro perro, int tam , int ultimoIdPerro);
 int perro_verificar (sPerro perro);
 int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro);
 void perro_mostrar (sPerro perro);
+sPerro perro_pedirDatosSinId (sPerro perro, int tam);
+int perro_verificarSinId (sPerro perro);
+int perro_modificar (sPerro lista[] , int tam , int index , int id);
+int perro_buscarCoincidenciaId (sPerro lista[] , int tam, int id);
 
 
 #endif /* PERRO_H_ */

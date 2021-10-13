@@ -43,6 +43,23 @@ int estadia_buscarLugar (sEstadia reserva[] , int tam)
 }
 
 
+int estadia_buscarCoincidenciaId2 (sEstadia reserva[] , int tam , int id)
+{
+	int i;
+	int posicion = -1;
+	for (i = 0; i < tam; i++)
+	{
+		if ( reserva[i].id == id)
+		{
+			posicion = i;
+			break;
+		}
+	}
+
+	return posicion;
+}
+
+
 //**
 sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId , sPerro lista[] , int tam)
 {
@@ -53,7 +70,7 @@ sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId , sPerro lista[] ,
 	sFecha fecha;
 
 	id = ultimoId + 1;
-	getString (nombreDuenio, "\n\nIngrese el nombre del dueño: ", "Error. Ingrese un nombre válido (hasta 20 caracteres): ", 21);
+	getString (nombreDuenio, "\nIngrese el nombre del dueño: ", "Error. Ingrese un nombre válido (hasta 20 caracteres): ", 21);
 	getInt (&telefonoContacto, "Ingrese tel: ", "Error. Ingrese teléfono válido: ", 1100000000 , 1199999999);
 	getInt (&idPerro, "Ingrese el ID del perro: ", "Error. Ingrese un ID válido: ", 1000 , 2000);
 		while (estadia_buscarCoincidenciaId (lista, tam , idPerro) == -1)
@@ -120,8 +137,8 @@ int estadia_verificar (sEstadia reserva)
 {
 	int respuesta;
 
-	printf("\n----------------------------------------------------------------\n"
-		   "\nDatos de la estadia A CONFIRMAR: "
+	printf("\n----------------------------------------------------------------"
+		   "\nDatos de la estadia A CONFIRMAR: \n"
 		   "\nID: %d\nNOMBRE DUEÑO: %s\nTEL: %d\nID PERRO: %d\nFECHA: %d/%d/%d\n"
 		   "\n----------------------------------------------------------------\n", reserva.id, reserva.nombreDuenio,
 			 reserva.telefonoContacto, reserva.idPerro, reserva.fecha.dia, reserva.fecha.mes, reserva.fecha.anio);
@@ -181,9 +198,9 @@ int estadia_modificar (int elemento)
 
 	if (elemento == 1 )
 	{
-		getInt (&nuevoTelefono ,"\nIngrese su nuevo número de teléfono: ","\nError. Reingrese un número válido (1100000000-1199999999): ", 1100000000,1199999999);
-		printf("\nSu nuevo número de teléfono es: %d ", nuevoTelefono);
-		getInt (&respuesta, "\nDesea confirmar la modificaion del TELEFONO (0 = no / 1 = si) ?: ", "\nError. Ingrese una opción válida (0 = no / 1 = si): ", 0 , 1);
+		getInt (&nuevoTelefono ,"\nIngrese su nuevo NUMERO DE TELEFONO: ","\nError. Reingrese un número válido (1100000000-1199999999): ", 1100000000,1199999999);
+		printf("\nSu nuevo número de teléfono es: %d\n", nuevoTelefono);
+		getInt (&respuesta, "\nDesea confirmar la modificacion del TELEFONO (0 = no / 1 = si) ?: ", "\nError. Ingrese una opción válida (0 = no / 1 = si): ", 0 , 1);
 
 		if ( respuesta == 1)
 		{
@@ -210,18 +227,18 @@ void estadia_mostrar (sEstadia reservas[] , sPerro listaPerros[],  int tamReserv
 {
 	int i;
 
-	printf("\n%-15s %-15s %-15s %-15s %-15s %-15s %-20s %-15s\n", "ID PERRO", "NOMBRE PERRO", "RAZA", "EDAD", "ID ESTADIA", "NOMBRE DUEÑO", "TELEFONO CONTACTO", "FECHA");
+	printf("\n%-15s %-15s %-15s %-15s %-15s %-15s %-20s %-15s\n", "ID ESTADIA", "ID PERRO", "NOMBRE PERRO", "RAZA", "EDAD", "NOMBRE DUEÑO", "TELEFONO CONTACTO", "FECHA");
 
 	for(i = 0; i < tamReservas; i++)
 	{
 		if (reservas[i].estado == 1)
 		{
-			printf("%-15d %-15s %-15s %-15d %-15d %-15s %-20d %-2d/%-2d/%-2d",
+			printf("%-15d %-15d %-15s %-15s %-15d %-15s %-20d %-2d/%-2d/%-2d",
+																			reservas[i].id,
 																			listaPerros[i].id,
 																			listaPerros[i].nombre,
 																			listaPerros[i].raza,
 																			listaPerros[i].edad,
-																			reservas[i].id,
 																			reservas[i].nombreDuenio,
 																			reservas[i].telefonoContacto,
 																			reservas[i].fecha.dia,

@@ -9,10 +9,11 @@
 #include "perro.h"
 #include "estadia.h"
 
-int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int tamPerros , int ultimoId)
+int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int tamPerros , int uIdEstadia , int uIdPerro )
 {
 	int opcion;
-	int auxUltimoId;
+	int auxUltimoIdEstadia;
+	int auxUltimoIdPerro;
 
 	do
 	{
@@ -42,12 +43,27 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 		switch (opcion)
 		{
 		case 1:
-				auxUltimoId = estadia_reservar (listaEstadias, tamEstadias , ultimoId);
-				if (auxUltimoId != -1)
+				printf("\nReservando estadía...\n\n");
+				auxUltimoIdPerro = perro_cargar (listaPerros, tamPerros, uIdPerro);
+				if (auxUltimoIdPerro != -1)
 				{
-					ultimoId = auxUltimoId;
+					uIdPerro = auxUltimoIdPerro;
+					auxUltimoIdEstadia = estadia_reservar (listaEstadias, tamEstadias , uIdEstadia, listaPerros, tamPerros);
+					if (auxUltimoIdEstadia != -1)
+					{
+						uIdEstadia = auxUltimoIdEstadia;
+						printf("\nHa realizado la reserva exitosamente!\n\n");
+						system("pause");
+					}
 				}
+
 				break;
+
+
+
+
+
+
 
 		}
 

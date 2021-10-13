@@ -13,8 +13,10 @@ División: 1°D
 #include "perro.h"
 #include "estadia.h"
 #include "menu.h"
+#include "fecha.h"
 #define TAM 3
-#define ID 100000
+#define IDESTADIA 100000
+#define IDPERRO 1000
 
 int main(void) {
 	setbuf(stdout, NULL);
@@ -25,7 +27,7 @@ int main(void) {
 	perro_inicializar (perros , TAM);
 	estadia_inicializar (reservas, TAM);
 
-	menu (reservas , TAM , perros, TAM , ID);
+	menu (reservas , TAM , perros, TAM , IDESTADIA , IDPERRO);
 
 
 

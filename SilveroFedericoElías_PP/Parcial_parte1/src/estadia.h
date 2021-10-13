@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "input.h"
+#include "fecha.h"
+#include "perro.h"
 #define ESTADIA_H_
 
 typedef struct
@@ -18,17 +20,18 @@ typedef struct
 	char nombreDuenio[21];
 	int telefonoContacto;
 	int idPerro;
-	int fecha;
+	sFecha fecha;
 	int estado;
 
 } sEstadia;
 
 
-int estadia_reservar (sEstadia reserva[] , int tam, int ultimoId);
-int estadia_verificar (sEstadia reserva);
-int estadia_buscarLugar (sEstadia reserva[] , int tam);
-sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId);
 int estadia_inicializar (sEstadia reservas[], int tam);
+int estadia_buscarLugar (sEstadia reserva[] , int tam);
+sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId , sPerro lista[] , int tam);
+int estadia_buscarCoincidenciaId (sPerro lista[] , int tam , int id);
+int estadia_verificar (sEstadia reserva);
+int estadia_reservar (sEstadia reserva[] , int tam , int ultimoId , sPerro lista[] , int tamPerro);
 
 
 #endif /* ESTADIA_H_ */

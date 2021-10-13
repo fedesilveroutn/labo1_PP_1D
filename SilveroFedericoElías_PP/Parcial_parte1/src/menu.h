@@ -12,8 +12,9 @@
 #include "perro.h"
 #include "estadia.h"
 #include "input.h"
+#include "fecha.h"
 #define MENU_H_
 
-int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int tamPerros , int ultimoId);
+int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int tamPerros , int uIdEstadia , int uIdPerro );
 
 #endif /* MENU_H_ */

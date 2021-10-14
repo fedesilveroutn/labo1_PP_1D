@@ -1,10 +1,13 @@
 
 #include "perro.h"
+
 /**
+ * @fn int perro_inicializar(sPerro[], int)
+ * @brief inicializa todos los estados de los subindeces del array sPerro en 0
  *
- * @param perros
- * @param tam
- * @return
+ * @param perros recibe un array sPerro
+ * @param tam recibe el tamaño del array
+ * @return retorna -1 si hubo error, retorna 0 si funcionó correctamente
  */
 int perro_inicializar (sPerro perros[], int tam)
 {
@@ -22,11 +25,50 @@ int perro_inicializar (sPerro perros[], int tam)
 }
 
 
+
 /**
+ * @fn int perro_hardcodear(sPerro[])
+ * @brief hardcodea los valores de los primeros 3 subindices de un array sPerro
  *
- * @param lista
- * @param tam
- * @return
+ * @param lista recibe un array sPerro
+ * @return retorna -1 si hubo error, retorna 0 si funcionó correctamente
+ */
+int perro_hardcodear (sPerro lista[])
+{
+	int ret = -1;
+	int i;
+
+	if (lista != NULL)
+	{
+		int ids[3] = {7000 , 7001, 7002};
+		char nombres[3][21] = {"Lobo" , "Sheila", "Reina" }    ;
+		char razas[3][21] = {"Sharpei" , "Golden" , "Galgo" };
+		int edades[3] = {2 , 12 , 13} ;
+		int estados[3] = {1 , 1 , 1 } ;
+
+		for (i = 0; i < 3; i++)
+		{
+			lista[i].id = ids[i];
+			strcpy (lista[i].nombre , nombres[i]);
+			strcpy (lista[i].raza , razas[i]);
+			lista[i].edad = edades[i];
+			lista[i].estado = estados[i];
+		}
+
+		ret = 0;
+	}
+	return ret;
+}
+
+
+
+/**
+ * @fn int perro_buscarLugar(sPerro[], int)
+ * @brief
+ *
+ * @param lista recibe un array sPerro
+ * @param tam recibe el tamaño del array
+ * @return retorna -1 si hubo error, retorna la posición si funcionó correctamente
  */
 int perro_buscarLugar (sPerro lista[] , int tam)
 {
@@ -47,12 +89,46 @@ int perro_buscarLugar (sPerro lista[] , int tam)
 	return posicion;
 }
 
+
+
 /**
+ * @fn int perro_buscarCoincidenciaId(sPerro[], int, int)
+ * @brief busca una coincidencia entre el ID pasado por parametro y el ID correspondiente al campo id del array sPerro
  *
- * @param perro
- * @param tam
- * @param ultimoIdPerro
- * @return
+ * @param lista recibe un array sPerro
+ * @param tam recibe el tamaño del array
+ * @param id recibe el id con el cual hacer la comparación
+ * @return retorna la posicion donde encontró la coincidencia con el id, -1 si no hay coincidencia
+ */
+int perro_buscarCoincidenciaId (sPerro lista[] , int tam, int id)
+{
+	int posicion = -1;
+	int i;
+	if (lista != NULL)
+	{
+		for ( i = 0 ; i < tam ; i++)
+		{
+			if (lista[i].id == id)
+			{
+				posicion = i;
+				break;
+			}
+		}
+	}
+
+	return posicion;
+}
+
+
+
+
+/**
+ * @fn sPerro perro_pedirDatos(sPerro, int)
+ * @brief pide los datos para cargar una instancia de sPerro
+ *
+ * @param perro recibe una instancia sPerro
+ * @param ultimoIdPerro recibe el último ID correspondiente al último perro ingresado
+ * @return retorna un aux sPerro cargado con todos los datos solicitados
  */
 sPerro perro_pedirDatos (sPerro perro , int ultimoIdPerro)
 {
@@ -76,6 +152,15 @@ sPerro perro_pedirDatos (sPerro perro , int ultimoIdPerro)
 }
 
 
+
+
+/**
+ * @fn sPerro perro_pedirDatosSinId(sPerro)
+ * @brief pide los datos para cargar una instancia sPerro pero sin pedir el ID
+ *
+ * @param perro recibe una instancia sPerro
+ * @return retorna un auxiliar cargado con los datos ingresados por el usuario
+ */
 sPerro perro_pedirDatosSinId (sPerro perro)
 {
 	char nombre[21];
@@ -95,10 +180,13 @@ sPerro perro_pedirDatosSinId (sPerro perro)
 }
 
 
+
 /**
+ * @fn int perro_verificar(sPerro)
+ * @brief muestra al usuario los datos cargados en perro y le preguntra si quiere confirmar
  *
- * @param perro
- * @return
+ * @param perro recibe una instancia sPerro
+ * @return retorna la respuesta ingresada por el usuario siendo 0 = no / 1 = si
  */
 int perro_verificar (sPerro perro)
 {
@@ -115,6 +203,14 @@ int perro_verificar (sPerro perro)
 }
 
 
+
+/**
+ * @fn int perro_verificarSinId(sPerro)
+ * @brief muestra al usuario los datos cargados en perro (sin el ID) y le preguntra si quiere confirmar
+ *
+ * @param perro perro recibe una instancia sPerro
+ * @return retorna la respuesta ingresada por el usuario siendo 0 = no / 1 = si
+ */
 int perro_verificarSinId (sPerro perro)
 {
 	int respuesta;
@@ -131,6 +227,15 @@ int perro_verificarSinId (sPerro perro)
 
 
 
+/**
+ * @fn int perro_cargar(sPerro[], int, int)
+ * @brief realiza la carga de una instancia sPerro
+ *
+ * @param lista recibe un array sPerro
+ * @param tam recibe el tamaño del array
+ * @param ultimoIdPerro recibe el último ID correspondiente a sPerro
+ * @return retorna el último ID actualizado o -1 si hubo un error
+ */
 int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro)
 {
 	sPerro aux;
@@ -172,17 +277,16 @@ int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro)
 
 
 
-void perro_mostrar (sPerro perro)
-{
-	if (perro.estado == 1 )
-	{
-		printf("%-20d %-20s %-20s %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad);
-	}
-}
-
-
-
-
+/**
+ * @fn int perro_modificar(sPerro[], int, int, int)
+ * @brief modifica los datos de una instancia de sPerro ingresando el ID correspondiente
+ *
+ * @param lista recibe un array sPerro
+ * @param tam recibe el tamaño del array
+ * @param pos recibe una posicion
+ * @param id recibe el ID correspondiente al perro
+ * @return retorna 0 si funcionó o -1 si hubo un error
+ */
 int perro_modificar (sPerro lista[] , int tam , int pos , int id)
 {
 	sPerro aux;
@@ -212,27 +316,14 @@ int perro_modificar (sPerro lista[] , int tam , int pos , int id)
 
 
 
-
-int perro_buscarCoincidenciaId (sPerro lista[] , int tam, int id)
-{
-	int posicion = -1;
-	int i;
-	if (lista != NULL)
-	{
-		for ( i = 0 ; i < tam ; i++)
-		{
-			if (lista[i].id == id)
-			{
-				posicion = i;
-				break;
-			}
-		}
-	}
-
-	return posicion;
-}
-
-
+/**
+ * @fn int perro_ordenarPorId(sPerro[], int)
+ * @brief ordena el array sPerro por el ID
+ *
+ * @param lista recibe un array sPerro
+ * @param tamPerros recibe el tamaño del array
+ * @return retorna 0 si funcionó correctamente o retorna -1 si hubo un error
+ */
 int perro_ordenarPorId (sPerro lista[], int tamPerros)
 {
 	int i;
@@ -278,6 +369,30 @@ int perro_ordenarPorId (sPerro lista[], int tamPerros)
 }
 
 
+
+/**
+ * @fn void perro_mostrar(sPerro)
+ * @brief muestra los datos cargados en la instancia de sPerro pasada por parámetro
+ *
+ * @param perro recibe una instancia sPerro
+ */
+void perro_mostrar (sPerro perro)
+{
+	if (perro.estado == 1 )
+	{
+		printf("%-20d %-20s %-20s %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad);
+	}
+}
+
+
+
+/**
+ * @fn void perro_mostrarTodos(sPerro[], int)
+ * @brief muestra todos los elementos del array sPerro
+ *
+ * @param lista recibe un array sPerro
+ * @param tamPerros recibe el tamaño del array
+ */
 void perro_mostrarTodos (sPerro lista[] , int tamPerros)
 {
 	int i;
@@ -300,7 +415,15 @@ void perro_mostrarTodos (sPerro lista[] , int tamPerros)
 
 
 
-
+/**
+ * @fn float perro_edadPromedio(sPerro[], int, int)
+ * @brief calcula el promedio de las edades
+ *
+ * @param lista recibe un array sPerro
+ * @param tamPerros recibe el tamaño del array
+ * @param contador recibe un contador
+ * @return retorna la edad promedio
+ */
 float perro_edadPromedio (sPerro lista[], int tamPerros, int contador)
 {
 	int i;
@@ -326,31 +449,6 @@ float perro_edadPromedio (sPerro lista[], int tamPerros, int contador)
 
 
 
-int perro_hardcodear (sPerro lista[])
-{
-	int ret = -1;
-	int i;
 
-	if (lista != NULL)
-	{
-		int ids[3] = {7000 , 7001, 7002};
-		char nombres[3][21] = {"Lobo" , "Sheila", "Reina" }    ;
-		char razas[3][21] = {"Sharpei" , "Golden" , "Galgo" };
-		int edades[3] = {2 , 12 , 13} ;
-		int estados[3] = {1 , 1 , 1 } ;
-
-		for (i = 0; i < 3; i++)
-		{
-			lista[i].id = ids[i];
-			strcpy (lista[i].nombre , nombres[i]);
-			strcpy (lista[i].raza , razas[i]);
-			lista[i].edad = edades[i];
-			lista[i].estado = estados[i];
-		}
-
-		ret = 0;
-	}
-	return ret;
-}
 
 

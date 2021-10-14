@@ -1,9 +1,3 @@
-/*
- * menu.h
- *
- *  Created on: 12 oct. 2021
- *      Author: Fede
- */
 
 #ifndef MENU_H_
 #include <stdio.h>
@@ -14,6 +8,7 @@
 #include "input.h"
 #include "fecha.h"
 #define MENU_H_
+
 
 int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int tamPerros , int uIdEstadia , int uIdPerro );
 

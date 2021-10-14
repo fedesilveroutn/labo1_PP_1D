@@ -1,11 +1,13 @@
-/*
- * fecha.c
- *
- *  Created on: 13 oct. 2021
- *      Author: Fede
- */
+
 #include "fecha.h"
 
+/**
+ * @fn sFecha fecha_pedir(char*)
+ * @brief pide el ingreso de una fecha y carga todos sus campos
+ *
+ * @param mensaje recibe un mensaje para ser mostrado al usuario antes de solicitar las fechas
+ * @return retorna una fecha cargada con valores
+ */
 sFecha fecha_pedir (char* mensaje)
 {
 	sFecha fecha;

@@ -1,9 +1,3 @@
-/*
- * fecha.h
- *
- *  Created on: 13 oct. 2021
- *      Author: Fede
- */
 
 #ifndef FECHA_H_
 #include <stdio.h>

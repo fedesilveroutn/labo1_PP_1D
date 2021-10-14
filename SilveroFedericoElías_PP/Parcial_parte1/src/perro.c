@@ -1,9 +1,3 @@
-/*
- * perro.c
- *
- *  Created on: 12 oct. 2021
- *      Author: Fede
- */
 
 #include "perro.h"
 /**

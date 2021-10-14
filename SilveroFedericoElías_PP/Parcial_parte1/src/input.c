@@ -6,14 +6,14 @@
 
 /**
  * @fn int getInt(int*, char*, char*, int, int)
- * @brief asks for an int and validates it in the given range
+ * @brief pide un entero y valida que se encuentre en el rango indicado
  *
- * @param num int*
- * @param message char*
- * @param errorMessage char*
- * @param min int
- * @param max int
- * @return 0 if function worked
+ * @param num int* recibe la dirección de memoria en donde se guardará el entero solicitado
+ * @param message char* recibe un literal con el mensaje de petición de un entero para ser mostrado al usuario
+ * @param errorMessage char* recibe un literal con el mensaje de error
+ * @param min int recibe el número minimo posible
+ * @param max int recibe el número máximo posible
+ * @return 0 si funcionó correctamente, retorna -1 si hubo un error
  */
 int getInt (int* num, char* message, char* errorMessage, int min, int max)
 {
@@ -44,14 +44,14 @@ int getInt (int* num, char* message, char* errorMessage, int min, int max)
 
 /**
  * @fn int getFloat(float*, char*, char*, int, int)
- * @brief asks for a float and validates it in the given range
+ * @brief pide el ingrese de un número flotante y lo valida en el rango indicado
  *
- * @param num float*
- * @param message char*
- * @param errorMessage char*
- * @param min int
- * @param max int
- * @return 0 if function worked
+ * @param num float* recibe la dirección de memoria en donde se guardará el flotante solicitado
+ * @param message char* recibe un literal con el mensaje de petición de un entero para ser mostrado al usuario
+ * @param errorMessage char* recibe un literal con el mensaje de error
+ * @param min int recibe el número minimo posible
+ * @param max int recibe el número máximo posible
+ * @return 0 si funcionó correctamente, retorna -1 si hubo un error
  */
 int getFloat(float* num, char* message, char* errorMessage, int min, int max)
 {
@@ -81,50 +81,13 @@ int getFloat(float* num, char* message, char* errorMessage, int min, int max)
 
 
 /**
- * @fn int getChar(char*, char*)
- * @brief asks for a char
- *
- * @param c char*
- * @param message char*
- * @param errorMessage char*
- * @param min char
- * @param max char
- * @return 0 if function worked
- */
-int getChar(char* c , char* message, char* errorMessage, char min, char max)
-{
-	int ret = -1;
-	char enteredChar;
-
-	if (c != NULL && message != NULL)
-	{
-		printf("%s", message);
-		fflush(stdin);
-		enteredChar = getchar();
-
-			while (enteredChar < min || enteredChar > max)
-			{
-				printf("%s", errorMessage);
-				fflush(stdin);
-				enteredChar = getchar();
-			}
-
-		*c = enteredChar;
-		ret = 0;
-	}
-	return ret;
-}
-
-
-
-/**
  * @fn void getString(char*, char*, char*, int)
- * @brief asks for a string and validates if it is smaller than the given limit
+ * @brief pide el ingrese de una cadena de caracteres y valida que no sea mayor al máximo permitido
  *
- * @param string char*
- * @param message char*
- * @param errorMessage char*
- * @param max int
+ * @param string char* recibe la dirección de memoria en donde se guardará la cadena de caracateres validada
+ * @param message char* recibe un literal con el mensaje de petición de un entero para ser mostrado al usuario
+ * @param errorMessage char* recibe un literal con el mensaje de error
+ * @param max int recibe el mayor número de caracteres aceptados
  */
 void getString (char* string, char* message, char* errorMessage, int max)
 {
@@ -146,19 +109,5 @@ void getString (char* string, char* message, char* errorMessage, int max)
 
 	strcpy (string, unvalidatedString);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

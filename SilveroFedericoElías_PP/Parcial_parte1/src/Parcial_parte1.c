@@ -28,21 +28,5 @@ int main(void) {
 
 	printf("\nFin del programa.");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	return 0;
 }

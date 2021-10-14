@@ -1,14 +1,21 @@
-/*
- * menu.c
- *
- *  Created on: 12 oct. 2021
- *      Author: Fede
- */
 
 #include "menu.h"
 #include "perro.h"
 #include "estadia.h"
 
+
+/**
+ * @fn int menu(sEstadia[], int, sPerro[], int, int, int)
+ * @brief contiene la lógica del programa, muestra los menus de opciones y sus distintos posibles flujos
+ *
+ * @param listaEstadias recibe un array de sEstadia
+ * @param tamEstadias recibe el tamaño del array listaEstadia
+ * @param listaPerros recibe un array de sPerro
+ * @param tamPerros recibe el tamaño del array listaPerros
+ * @param uIdEstadia recibe el último id correspondiente a las estadías
+ * @param uIdPerro recibe el último id correspondiente a los perros
+ * @return retorna 0 si funcionó correctamente.
+ */
 int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int tamPerros , int uIdEstadia , int uIdPerro )
 {
 	int opcion;
@@ -20,8 +27,8 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 	int idModificacion;
 	int posicion;
 	int cancelacion;
-	int contadorPerros = 3;
 	float edadPromedio;
+	int contadorPerros = 3;
 	int flag = 1;
 
 	if (listaEstadias != NULL && listaPerros != NULL)
@@ -113,7 +120,6 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 							switch (opcionSubMenu)
 							{
 							case 1:
-									//modificacion telefono
 									printf("\nModificando el teléfono de contacto...\n");
 									auxNuevoTelefono = estadia_modificar (1);
 									if (auxNuevoTelefono != -1)
@@ -133,7 +139,6 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 
 
 							case 2:
-									//modificacion perro
 									printf("\nModificando el perro...\n");
 									if (posicion != -1)
 									{
@@ -162,7 +167,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 						printf("\nError. Para acceder a las funciones primero debe hacer una reserva!\n");
 					}
 
-						break;
+					break;
 
 			case 3:
 
@@ -199,13 +204,11 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 				{
 					printf("\nError. Para acceder a las funciones primero debe hacer una reserva\n");
 				}
-					break;
 
-
+				break;
 
 
 			case 4:
-
 					if(flag == 1 || contadorPerros > 0)
 					{
 						estadia_mostrarSoloEstadia(listaEstadias, tamEstadias);
@@ -215,6 +218,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					{
 						printf("\nError. Para acceder a las funciones primero debe hacer una reserva\n");
 					}
+
 					break;
 
 
@@ -243,9 +247,9 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					{
 						printf("\nError. Para acceder a las funciones primero debe hacer una reserva\n");
 					}
+
 					break;
 			}
-
 
 		}while (opcion != 7);
 	}

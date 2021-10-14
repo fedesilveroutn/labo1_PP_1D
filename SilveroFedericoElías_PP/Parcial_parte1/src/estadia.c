@@ -30,12 +30,15 @@ int estadia_buscarLugar (sEstadia reserva[] , int tam)
 {
 	int i;
 	int posicion = -1;
-	for (i = 0; i < tam; i++)
+	if(reserva != NULL)
 	{
-		if ( reserva[i].estado == 0)
+		for (i = 0; i < tam; i++)
 		{
-			posicion = i;
-			break;
+			if ( reserva[i].estado == 0)
+			{
+				posicion = i;
+				break;
+			}
 		}
 	}
 
@@ -52,24 +55,26 @@ sEstadia estadia_pedirDatos (sEstadia auxiliar , int ultimoId , sPerro lista[] ,
 	int idPerro;
 	sFecha fecha;
 
-	id = ultimoId + 1;
-	getString (nombreDuenio, "\n\nIngrese el nombre del dueño: ", "Error. Ingrese un nombre válido (hasta 20 caracteres): ", 21);
-	getInt (&telefonoContacto, "Ingrese tel: ", "Error. Ingrese teléfono válido: ", 1100000000 , 1199999999);
-	getInt (&idPerro, "Ingrese el ID del perro: ", "Error. Ingrese un ID válido: ", 1000 , 10000);
-		while (estadia_buscarCoincidenciaId (lista, tam , idPerro) == -1)
-		{
-			printf("Error. ID inexistente. Reintente.\n");
-			getInt (&idPerro, "Ingrese el ID del perro: ", "Error. Ingrese un ID válido: ", 1000 , 2000);
-		}
+	if (lista != NULL)
+	{
+		id = ultimoId + 1;
+		getString (nombreDuenio, "\n\nIngrese el nombre del dueño: ", "Error. Ingrese un nombre válido (hasta 20 caracteres): ", 21);
+		getInt (&telefonoContacto, "Ingrese tel: ", "Error. Ingrese teléfono válido: ", 1100000000 , 1199999999);
+		getInt (&idPerro, "Ingrese el ID del perro: ", "Error. Ingrese un ID válido: ", 1000 , 10000);
+			while (estadia_buscarCoincidenciaId (lista, tam , idPerro) == -1)
+			{
+				printf("Error. ID inexistente. Reintente.\n");
+				getInt (&idPerro, "Ingrese el ID del perro: ", "Error. Ingrese un ID válido: ", 1000 , 2000);
+			}
 
-	fecha = fecha_pedir("\nDatos de la reserva");
+		fecha = fecha_pedir("\nDatos de la reserva");
 
-	auxiliar.id = id;
-	strcpy (auxiliar.nombreDuenio , nombreDuenio);
-	auxiliar.telefonoContacto = telefonoContacto;
-	auxiliar.idPerro = idPerro;
-	auxiliar.fecha = fecha;
-
+		auxiliar.id = id;
+		strcpy (auxiliar.nombreDuenio , nombreDuenio);
+		auxiliar.telefonoContacto = telefonoContacto;
+		auxiliar.idPerro = idPerro;
+		auxiliar.fecha = fecha;
+	}
 	return auxiliar;
 }
 
@@ -98,12 +103,15 @@ int estadia_buscarCoincidenciaId2 (sEstadia reserva[] , int tam , int id)
 {
 	int i;
 	int posicion = -1;
-	for (i = 0; i < tam; i++)
+	if(reserva != NULL)
 	{
-		if ( reserva[i].id == id)
+		for (i = 0; i < tam; i++)
 		{
-			posicion = i;
-			break;
+			if ( reserva[i].id == id)
+			{
+				posicion = i;
+				break;
+			}
 		}
 	}
 
@@ -158,30 +166,32 @@ int estadia_reservar (sEstadia reserva[] , int tam , int ultimoId , sPerro lista
 	int confirmacion;
 	int index;
 
-
-	if (estadia_buscarLugar (reserva , tam) != -1)
+	if (reserva != NULL && lista != NULL)
 	{
-		aux = estadia_pedirDatos (aux , ultimoId , lista , tamPerro);
-		confirmacion = estadia_verificar (aux);
-
-		if(confirmacion == 1)
+		if (estadia_buscarLugar (reserva , tam) != -1)
 		{
-			index = estadia_buscarLugar (reserva , tam);
-			reserva[index] = aux;
-			reserva[index].estado = 1;
-			ultimoId++;
-			ret = ultimoId;
+			aux = estadia_pedirDatos (aux , ultimoId , lista , tamPerro);
+			confirmacion = estadia_verificar (aux);
+
+			if(confirmacion == 1)
+			{
+				index = estadia_buscarLugar (reserva , tam);
+				reserva[index] = aux;
+				reserva[index].estado = 1;
+				ultimoId++;
+				ret = ultimoId;
+			}
+
+			else
+			{
+				printf("\nUsted ha cancelado la reserva.\n");
+			}
 		}
 
 		else
 		{
-			printf("\nUsted ha cancelado la reserva.\n");
+			printf("\nNo hay lugar disponible para reservar.\n");
 		}
-	}
-
-	else
-	{
-		printf("\nNo hay lugar disponible para reservar.");
 	}
 
 	return ret;
@@ -223,39 +233,13 @@ int estadia_modificar (int elemento)
 
 
 
-void estadia_mostrar (sEstadia reservas[] , sPerro listaPerros[],  int tamReservas)
-{
-	int i;
-
-	printf("\n%-15s %-15s %-15s %-15s %-15s %-15s %-20s %-15s\n", "ID ESTADIA", "ID PERRO", "NOMBRE PERRO", "RAZA", "EDAD", "NOMBRE DUEÑO", "TELEFONO CONTACTO", "FECHA");
-
-	for(i = 0; i < tamReservas; i++)
-	{
-		if (reservas[i].estado == 1)
-		{
-			printf("%-15d %-15d %-15s %-15s %-15d %-15s %-20d %-2d/%-2d/%-2d\n",
-																			reservas[i].id,
-																			listaPerros[i].id,
-																			listaPerros[i].nombre,
-																			listaPerros[i].raza,
-																			listaPerros[i].edad,
-																			reservas[i].nombreDuenio,
-																			reservas[i].telefonoContacto,
-																			reservas[i].fecha.dia,
-																			reservas[i].fecha.mes,
-																			reservas[i].fecha.anio);
-	    }
-	}
-}
-
-
 
 int estadia_cancelar (sPerro perros[], int tamPerros, sEstadia reserva[], int tamEstadias , int id)
 {
 	int ret = -1;
 	int pos;
 
-	if (reserva != NULL)
+	if (reserva != NULL && perros!= NULL)
 	{
 		pos = estadia_buscarCoincidenciaId2(reserva, tamEstadias, id);
 		reserva[pos].estado = 0;
@@ -271,21 +255,24 @@ void estadia_mostrarSoloEstadia (sEstadia reservas[] ,  int tamReservas)
 {
 	int i;
 
-	estadia_ordenarPorFecha (reservas, tamReservas);
-
-	printf("\n%-15s %-15s %-20s %-15s\n", "ID ESTADIA", "NOMBRE DUEÑO", "TELEFONO CONTACTO", "FECHA");
-
-	for(i = 0; i < tamReservas; i++)
+	if (reservas != NULL)
 	{
-		if (reservas[i].estado == 1)
+		estadia_ordenarPorFecha (reservas, tamReservas);
+
+		printf("\n%-15s %-15s %-20s %-15s\n", "ID ESTADIA", "NOMBRE DUEÑO", "TELEFONO CONTACTO", "FECHA");
+
+		for(i = 0; i < tamReservas; i++)
 		{
-			printf("%-15d %-15s %-20d %-2d/%-2d/%-2d\n",
-														reservas[i].id,
-														reservas[i].nombreDuenio,
-														reservas[i].telefonoContacto,
-														reservas[i].fecha.dia,
-														reservas[i].fecha.mes,
-														reservas[i].fecha.anio);
+			if (reservas[i].estado == 1)
+			{
+				printf("%-15d %-15s %-20d %-2d/%-2d/%-2d\n",
+															reservas[i].id,
+															reservas[i].nombreDuenio,
+															reservas[i].telefonoContacto,
+															reservas[i].fecha.dia,
+															reservas[i].fecha.mes,
+															reservas[i].fecha.anio);
+			}
 		}
 	}
 }
@@ -301,38 +288,72 @@ int estadia_ordenarPorFecha (sEstadia reservas[], int tamReservas)
 	sEstadia aux;
 	int ret = -1;
 
-	nuevoLimite = tamReservas - 1;
-
-	do
+	if (reservas != NULL)
 	{
-		swap = 0;
-		for ( i = 0; i < nuevoLimite; i++)
+		nuevoLimite = tamReservas - 1;
+
+		do
 		{
-			if (reservas[i].fecha.anio < reservas[i+1].fecha.anio || reservas[i].fecha.mes < reservas[i+1].fecha.mes || reservas[i].fecha.dia < reservas[i+1].fecha.dia )
+			swap = 0;
+			for ( i = 0; i < nuevoLimite; i++)
 			{
-				aux = reservas[i];
-				reservas[i] = reservas[i+1];
-				reservas[i+1] = aux;
-				swap = 1;
-			}
-			else if (reservas[i].fecha.anio == reservas[i+1].fecha.anio)
-			{
-				if ( strcmp (reservas[i].nombreDuenio , reservas[i+1].nombreDuenio) == 1 )
+				if (reservas[i].fecha.anio < reservas[i+1].fecha.anio || reservas[i].fecha.mes < reservas[i+1].fecha.mes || reservas[i].fecha.dia < reservas[i+1].fecha.dia )
 				{
 					aux = reservas[i];
 					reservas[i] = reservas[i+1];
 					reservas[i+1] = aux;
 					swap = 1;
 				}
+				else if (reservas[i].fecha.anio == reservas[i+1].fecha.anio)
+				{
+					if ( strcmp (reservas[i].nombreDuenio , reservas[i+1].nombreDuenio) == 1 )
+					{
+						aux = reservas[i];
+						reservas[i] = reservas[i+1];
+						reservas[i+1] = aux;
+						swap = 1;
+					}
+				}
 			}
-		}
-		nuevoLimite--;
+			nuevoLimite--;
 
-	}while (swap == 1);
+		}while (swap == 1);
 
-	ret = 0;
+		ret = 0;
+	}
 	return ret;
 }
 
 
+int estadia_hardcodear (sEstadia reserva[])
+{
+	int ret = -1;
+	int i;
+	if(reserva != NULL)
+	{
+		int ids[3] = {100000 , 100001 , 100002};
+		char duenioNombres[3][51] = {"Federico" , "Valentin", "Constanza" };
+		int telefonoContacto[3] = {1132497707 , 1122442411 , 1132924403};
+		int idsPerros[3] = {7000 , 7001 , 7002 };
+		int dias[3] = {13 , 20 , 27};
+		int meses[3] = {10 , 11 , 12};
+		int anios[3] = {2021 , 2021 , 2021};
+		int estados[3] = {1 , 1 , 1};
+
+		for (i = 0; i < 3; i++)
+		{
+			reserva[i].id = ids[i];
+			strcpy (reserva[i].nombreDuenio , duenioNombres[i]);
+			reserva[i].telefonoContacto = telefonoContacto[i];
+			reserva[i].idPerro = idsPerros[i];
+			reserva[i].fecha.dia = dias[i];
+			reserva[i].fecha.mes = meses[i];
+			reserva[i].fecha.anio = anios[i];
+			reserva[i].estado = estados[i];
+		}
+
+		ret = 0;
+	}
+	return ret;
+}
 

@@ -38,12 +38,15 @@ int perro_buscarLugar (sPerro lista[] , int tam)
 {
 	int i;
 	int posicion = -1;
-	for (i = 0; i < tam; i++)
+	if (lista != NULL)
 	{
-		if ( lista[i].estado == 0)
+		for (i = 0; i < tam; i++)
 		{
-			posicion = i;
-			break;
+			if ( lista[i].estado == 0)
+			{
+				posicion = i;
+				break;
+			}
 		}
 	}
 
@@ -57,7 +60,7 @@ int perro_buscarLugar (sPerro lista[] , int tam)
  * @param ultimoIdPerro
  * @return
  */
-sPerro perro_pedirDatos (sPerro perro, int tam , int ultimoIdPerro)
+sPerro perro_pedirDatos (sPerro perro , int ultimoIdPerro)
 {
 	int id;
 	char nombre[21];
@@ -79,7 +82,7 @@ sPerro perro_pedirDatos (sPerro perro, int tam , int ultimoIdPerro)
 }
 
 
-sPerro perro_pedirDatosSinId (sPerro perro, int tam)
+sPerro perro_pedirDatosSinId (sPerro perro)
 {
 	char nombre[21];
 	char raza[21];
@@ -140,36 +143,36 @@ int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro)
 	int ret = -1;
 	int confirmacion;
 	int index;
-
-
-	if (perro_buscarLugar (lista , tam) != -1)
+	if (lista != NULL)
 	{
-		aux = perro_pedirDatos (aux , tam , ultimoIdPerro);
-		confirmacion = perro_verificar (aux);
-
-		if(confirmacion == 1)
+		if (perro_buscarLugar (lista , tam) != -1)
 		{
-			index = perro_buscarLugar (lista , tam);
-			lista[index] = aux;
-			lista[index].estado = 1;
-			ultimoIdPerro++;
-			printf("\n----------------------------------------------------------------------------------------");
-			printf("\n%-20s %-20s %-20s %-20s\n", "ID PERRO", "NOMBRE", "RAZA", "EDAD");
-			perro_mostrar(lista[index]);
-			ret = ultimoIdPerro;
+			aux = perro_pedirDatos (aux , ultimoIdPerro);
+			confirmacion = perro_verificar (aux);
+
+			if(confirmacion == 1)
+			{
+				index = perro_buscarLugar (lista , tam);
+				lista[index] = aux;
+				lista[index].estado = 1;
+				ultimoIdPerro++;
+				printf("\n----------------------------------------------------------------------------------------");
+				printf("\n%-20s %-20s %-20s %-20s\n", "ID PERRO", "NOMBRE", "RAZA", "EDAD");
+				perro_mostrar(lista[index]);
+				ret = ultimoIdPerro;
+			}
+
+			else
+			{
+				printf("\nUsted ha cancelado la carga del perro.\n");
+			}
 		}
 
 		else
 		{
-			printf("\nUsted ha cancelado la carga del perro.\n");
+			printf("\nNo hay lugar disponible para la carga del perro.");
 		}
 	}
-
-	else
-	{
-		printf("\nNo hay lugar disponible para la carga del perro.");
-	}
-
 	return ret;
 }
 
@@ -177,7 +180,10 @@ int perro_cargar (sPerro lista[] , int tam , int ultimoIdPerro)
 
 void perro_mostrar (sPerro perro)
 {
-	printf("%-20d %-20s %-20s %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad);
+	if (perro.estado == 1 )
+	{
+		printf("%-20d %-20s %-20s %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad);
+	}
 }
 
 
@@ -188,21 +194,23 @@ int perro_modificar (sPerro lista[] , int tam , int pos , int id)
 	sPerro aux;
 	int ret = -1;
 	int confirmacion;
-
-	aux = perro_pedirDatosSinId (aux , tam );
-	aux.id = id;
-
-	confirmacion = perro_verificarSinId (aux);
-	if(confirmacion == 1)
+	if(lista != NULL)
 	{
-		lista[pos] = aux;
-		perro_mostrar(lista[pos]);
-		ret = 0;
-	}
+		aux = perro_pedirDatosSinId (aux);
+		aux.id = id;
 
-	else
-	{
-		printf("\nUsted ha cancelado la modificacion del perro.\n");
+		confirmacion = perro_verificarSinId (aux);
+		if(confirmacion == 1)
+		{
+			lista[pos] = aux;
+			perro_mostrar(lista[pos]);
+			ret = 0;
+		}
+
+		else
+		{
+			printf("\nUsted ha cancelado la modificacion del perro.\n");
+		}
 	}
 
 	return ret;
@@ -215,12 +223,15 @@ int perro_buscarCoincidenciaId (sPerro lista[] , int tam, int id)
 {
 	int posicion = -1;
 	int i;
-	for ( i = 0 ; i < tam ; i++)
+	if (lista != NULL)
 	{
-		if (lista[i].id == id)
+		for ( i = 0 ; i < tam ; i++)
 		{
-			posicion = i;
-			break;
+			if (lista[i].id == id)
+			{
+				posicion = i;
+				break;
+			}
 		}
 	}
 
@@ -236,37 +247,40 @@ int perro_ordenarPorId (sPerro lista[], int tamPerros)
 	sPerro aux;
 	int ret = -1;
 
-	nuevoLimite = tamPerros - 1;
-
-	do
+	if (lista != NULL)
 	{
-		swap = 0;
-		for ( i = 0; i < nuevoLimite; i++)
+		nuevoLimite = tamPerros - 1;
+
+		do
 		{
-			if (lista[i].id > lista[i+1].id)
+			swap = 0;
+			for ( i = 0; i < nuevoLimite; i++)
 			{
-				aux = lista[i];
-				lista[i] = lista[i+1];
-				lista[i+1] = aux;
-				swap = 1;
-			}
-			else if (lista[i].id == lista[i+1].id)
-			{
-				if ( strcmp (lista[i].nombre , lista[i+1].nombre) == 1 )
+				if (lista[i].id > lista[i+1].id)
 				{
 					aux = lista[i];
 					lista[i] = lista[i+1];
 					lista[i+1] = aux;
 					swap = 1;
 				}
+				else if (lista[i].id == lista[i+1].id)
+				{
+					if ( strcmp (lista[i].nombre , lista[i+1].nombre) == 1 )
+					{
+						aux = lista[i];
+						lista[i] = lista[i+1];
+						lista[i+1] = aux;
+						swap = 1;
+					}
+				}
 			}
-		}
-		nuevoLimite--;
+			nuevoLimite--;
 
-	}while (swap == 1);
+		}while (swap == 1);
 
-	ret = 0;
-	return ret;
+		ret = 0;
+	}
+		return ret;
 }
 
 
@@ -318,6 +332,31 @@ float perro_edadPromedio (sPerro lista[], int tamPerros, int contador)
 
 
 
+int perro_hardcodear (sPerro lista[])
+{
+	int ret = -1;
+	int i;
 
+	if (lista != NULL)
+	{
+		int ids[3] = {7000 , 7001, 7002};
+		char nombres[3][21] = {"Lobo" , "Sheila", "Reina" }    ;
+		char razas[3][21] = {"Sharpei" , "Golden" , "Galgo" };
+		int edades[3] = {2 , 12 , 13} ;
+		int estados[3] = {1 , 1 , 1 } ;
+
+		for (i = 0; i < 3; i++)
+		{
+			lista[i].id = ids[i];
+			strcpy (lista[i].nombre , nombres[i]);
+			strcpy (lista[i].raza , razas[i]);
+			lista[i].edad = edades[i];
+			lista[i].estado = estados[i];
+		}
+
+		ret = 0;
+	}
+	return ret;
+}
 
 

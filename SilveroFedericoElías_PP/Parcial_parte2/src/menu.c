@@ -71,7 +71,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					"\n8. Listado de perros con sus estadías diarias reservadas"
 					"\n9. SALIR"
 					"\n-------------------------------------------\n"
-					"Error. Reingrese una opcion válida (1-7): ", 1 , 7);
+					"Error. Reingrese una opcion válida (1-7): ", 1 , 9);
 
 
 			switch (opcion)
@@ -298,11 +298,17 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 				    nexo_mostrarPerrosConEstadias (listaPerros, tamPerros, listaEstadias ,  tamEstadias);
 					break;
 
+
+			case 9:
+					printf("\nSaliendo...\n");
+					break;
+
 			}
 
 		}while (opcion != 9);
 	}
 
+	printf("\nFin del programa.");
 	return 0;
 }
 

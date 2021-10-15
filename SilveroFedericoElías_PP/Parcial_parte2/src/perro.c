@@ -380,7 +380,7 @@ void perro_mostrar (sPerro perro)
 {
 	if (perro.estado == 1 )
 	{
-		printf("%-20d %-20s %-20s %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad);
+		printf("\n%-20d %-20s %-20s %-20d", perro.id, perro.nombre, perro.raza, perro.edad);
 	}
 }
 
@@ -449,6 +449,23 @@ float perro_edadPromedio (sPerro lista[], int tamPerros, int contador)
 
 
 
+int perro_encontrarMayorCantidadEstadias (sPerro listaPerros[], int tamPerros)
+{
+	int max;
+	int pos;
+	int i;
+	int flag = 0;
 
+	for (i = 0; i < tamPerros; i++)
+	{
+		if (flag == 0 || listaPerros[i].contadorEstadias > max)
+		{
+			max = listaPerros[i].contadorEstadias;
+			pos = i;
+			flag = 1;
+		}
+	}
 
+	return pos;
+}
 

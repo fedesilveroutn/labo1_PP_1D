@@ -12,19 +12,22 @@ División: 1°D
 #include <string.h>
 #include "perro.h"
 #include "estadia.h"
+#include "duenio.h"
 #include "menu.h"
 #include "fecha.h"
 #define TAM 5
-#define IDESTADIA 100002
+#define IDESTADIA 100002 //inicializo los IDs porque los había hardcodeado
 #define IDPERRO 7002
+#define IDDUENIO 30002
 
 int main(void) {
 	setbuf(stdout, NULL);
 
 	sPerro perros [TAM];
 	sEstadia reservas [TAM];
+	sDuenio duenios [TAM];
 
-	menu (reservas , TAM , perros, TAM , IDESTADIA , IDPERRO);
+	menu (reservas , TAM , perros, TAM , duenios, TAM , IDESTADIA , IDPERRO , IDDUENIO );
 
 	printf("\nFin del programa.");
 

@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "input.h"
+
 #define PERRO_H_
 
 typedef struct
@@ -13,6 +14,7 @@ typedef struct
 	char raza[21];
 	int edad;
 	int estado;
+	int contadorEstadias;
 
 } sPerro;
 
@@ -30,5 +32,7 @@ int perro_ordenarPorId (sPerro lista[], int tamPerros);
 void perro_mostrar (sPerro perro);
 void perro_mostrarTodos (sPerro lista[] , int tamPerros);
 float perro_edadPromedio (sPerro lista[], int tamPerros, int contador);
+int perro_encontrarMayorCantidadEstadias (sPerro listaPerros[], int tamPerros);
+
 
 #endif /* PERRO_H_ */

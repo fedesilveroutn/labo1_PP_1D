@@ -59,7 +59,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					"\n8. Listado de perros con sus estadías diarias reservadas"
 					"\n9. SALIR"
 					"\n-------------------------------------------\n"
-					"Ingrese una opcion (1-7): ",
+					"Ingrese una opcion (1-9): ",
 					"\n-------------------------------------------\n"
 					"\n1. RESERVAR ESTADIA"
 					"\n2. MODIFICAR ESTADIA"
@@ -71,7 +71,7 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 					"\n8. Listado de perros con sus estadías diarias reservadas"
 					"\n9. SALIR"
 					"\n-------------------------------------------\n"
-					"Error. Reingrese una opcion válida (1-7): ", 1 , 9);
+					"Error. Reingrese una opcion válida (1-9): ", 1 , 9);
 
 
 			switch (opcion)

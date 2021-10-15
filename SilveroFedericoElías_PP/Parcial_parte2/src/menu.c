@@ -308,7 +308,6 @@ int menu (sEstadia listaEstadias[], int tamEstadias , sPerro listaPerros[] , int
 		}while (opcion != 9);
 	}
 
-	printf("\nFin del programa.");
 	return 0;
 }
 

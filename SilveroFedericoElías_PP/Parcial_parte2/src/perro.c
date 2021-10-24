@@ -1,5 +1,6 @@
 
 #include "perro.h"
+#include <stdio.h>
 
 /**
  * @fn int perro_inicializar(sPerro[], int)

@@ -1,6 +1,6 @@
 /*
  ============================================================================
-Parcial: Parte 1
+Parcial: Parte 2
 Alumno: Federico Elías Silvero
 División: 1°D
 
@@ -23,9 +23,10 @@ División: 1°D
 int main(void) {
 	setbuf(stdout, NULL);
 
+	//declaro un array para cada estructura
 	sPerro perros [TAM];
-	sEstadia reservas [TAM];
 	sDuenio duenios [TAM];
+	sEstadia reservas [TAM];
 
 	menu (reservas , TAM , perros, TAM , duenios, TAM , IDESTADIA , IDPERRO , IDDUENIO );
 
